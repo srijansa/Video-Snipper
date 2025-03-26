@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.video.videosnipper/org.video.videosnipper.HelloApplication</mainClass>
+                            <mainClass>org.video.videosnipper/org.video.videosnipper.VideoApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
