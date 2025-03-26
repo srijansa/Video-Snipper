@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.video.videosnipper.VideoController">
     <bottom>
         <VBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
@@ -31,12 +31,8 @@
                    <menus>
                        <Menu mnemonicParsing="false" text="File">
                            <items>
-                               <MenuItem mnemonicParsing="false" text="Close" />
-                           </items>
-                       </Menu>
-                       <Menu mnemonicParsing="false" text="Edit">
-                           <items>
-                               <MenuItem mnemonicParsing="false" text="Delete" />
+                               <MenuItem mnemonicParsing="false" onAction="#handleOpenAction" text="Open" />
+                               <MenuItem mnemonicParsing="false" text="Exit" />
                            </items>
                        </Menu>
                        <Menu mnemonicParsing="false" text="Help">
@@ -54,7 +50,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <MediaView fitHeight="200.0" fitWidth="200.0" />
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
          </children>
       </StackPane>
    </center>

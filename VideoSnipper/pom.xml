@@ -29,12 +29,6 @@
             <classifier>win</classifier>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-media</artifactId>
-            <version>${javafx.version}</version>
-            <classifier>win</classifier>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
@@ -52,6 +46,7 @@
             <version>${javafx.version}</version>
             <classifier>win</classifier>
         </dependency>
+
     </dependencies>
 
     <build>
