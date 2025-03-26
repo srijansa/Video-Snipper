@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.media.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <bottom>
@@ -24,4 +24,38 @@
             </children>
         </VBox>
     </bottom>
+   <top>
+       <HBox alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
+           <children>
+               <MenuBar prefHeight="25.0" prefWidth="571.0">
+                   <menus>
+                       <Menu mnemonicParsing="false" text="File">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="Close" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="Edit">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="Delete" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="Help">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="About" />
+                           </items>
+                       </Menu>
+                   </menus>
+               </MenuBar>
+               <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+               <Button text="✖" />
+           </children>
+       </HBox>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <MediaView fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </StackPane>
+   </center>
 </BorderPane>
