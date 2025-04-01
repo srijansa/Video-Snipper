@@ -1,5 +1,4 @@
 package org.video.videosnipper;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
@@ -8,6 +7,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.media.*;
 import javafx.stage.FileChooser;
 import java.io.File;
+import javafx.scene.image.WritableImage;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import javafx.embed.swing.SwingFXUtils;
 
 public class VideoController {
     private String filePath;
@@ -79,6 +82,23 @@ public class VideoController {
                 newTime = javafx.util.Duration.ZERO;
             }
             mediaPlayer.seek(newTime);
+        }
+    }
+    @FXML
+    private void handleScreenshot() {
+        if (mediaView != null && mediaView.getMediaPlayer() != null) {
+            WritableImage image = mediaView.snapshot(null, null);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Screenshot");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Image", "*.png"));
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

@@ -46,7 +46,12 @@
             <version>${javafx.version}</version>
             <classifier>win</classifier>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>17.0.9</version>
+            <classifier>win</classifier>
+        </dependency>
     </dependencies>
 
     <build>
