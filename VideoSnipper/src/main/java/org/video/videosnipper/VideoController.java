@@ -18,6 +18,22 @@ public class VideoController {
     private Button playPauseButton;
     @FXML
     private ComboBox<String> speedBox;
+    @FXML
+    private void skipBackwardTen(){
+        skipBySeconds(-10);
+    }
+    @FXML
+    private void skipForwardTen(){
+        skipBySeconds(10);
+    }
+    @FXML
+    private void skipBackwardTwenty(){
+        skipBySeconds(-20);
+    }
+    @FXML
+    private void skipForwardTwenty(){
+        skipBySeconds(20);
+    }
     public void handleOpenAction(javafx.event.ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Video Files", "*.mp4");
@@ -53,6 +69,16 @@ public class VideoController {
         if (option != null) {
             double rate = Double.parseDouble(option.replace("x", ""));
             mediaPlayer.setRate(rate);
+        }
+    }
+    private void skipBySeconds(int seconds) {
+        if (mediaPlayer != null) {
+            javafx.util.Duration currentTime = mediaPlayer.getCurrentTime();
+            javafx.util.Duration newTime = currentTime.add(javafx.util.Duration.seconds(seconds));
+            if (newTime.lessThan(javafx.util.Duration.ZERO)) {
+                newTime = javafx.util.Duration.ZERO;
+            }
+            mediaPlayer.seek(newTime);
         }
     }
 }
