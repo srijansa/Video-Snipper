@@ -1,5 +1,7 @@
 package org.video.videosnipper;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.media.*;
 import javafx.stage.FileChooser;
@@ -22,8 +24,11 @@ public class VideoController {
             Media media = new Media(filePath);
             mediaPlayer = new MediaPlayer(media);
             mediaView.setMediaPlayer(mediaPlayer);
+            DoubleProperty height = mediaView.fitWidthProperty();
+            DoubleProperty width = mediaView.fitHeightProperty();
+            width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
+            height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
             mediaPlayer.play();
         }
-
     }
 }

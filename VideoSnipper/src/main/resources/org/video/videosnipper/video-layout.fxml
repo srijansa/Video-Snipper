@@ -43,7 +43,6 @@
                    </menus>
                </MenuBar>
                <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
-               <Button text="✖" />
            </children>
        </HBox>
    </top>
