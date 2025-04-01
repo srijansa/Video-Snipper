@@ -2,9 +2,7 @@ package org.video.videosnipper;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.scene.media.*;
 import javafx.stage.FileChooser;
 import java.io.File;
@@ -12,6 +10,7 @@ import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.util.Duration;
 
 public class VideoController {
     private String filePath;
@@ -24,6 +23,14 @@ public class VideoController {
     private ComboBox<String> speedBox;
     @FXML
     private CheckBox loopCheckBox;
+    @FXML
+    private Slider progressSlider;
+    @FXML
+    private Slider volumeSlider;
+    @FXML
+    private Label elapsedLabel;
+    @FXML
+    private Label durationLabel;
     @FXML
     private void skipBackwardTen(){
         skipBySeconds(-10);
@@ -54,6 +61,19 @@ public class VideoController {
             DoubleProperty width = mediaView.fitHeightProperty();
             width.bind(Bindings.selectDouble(mediaView.sceneProperty(), "width"));
             height.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
+            mediaPlayer.setOnReady(() -> {
+                progressSlider.setMax(mediaPlayer.getTotalDuration().toSeconds());
+                durationLabel.setText(formatTime(mediaPlayer.getTotalDuration().toSeconds()));
+            });
+
+            mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+                if (!progressSlider.isValueChanging()) {
+                    progressSlider.setValue(newTime.toSeconds());
+                }
+                elapsedLabel.setText(formatTime(newTime.toSeconds()));
+            });
+
+            volumeSlider.setValue(mediaPlayer.getVolume());
             mediaPlayer.play();
         }
     }
@@ -110,4 +130,24 @@ public class VideoController {
         boolean loopCheck = loopCheckBox.isSelected();
         mediaPlayer.setCycleCount(loopCheck? MediaPlayer.INDEFINITE : 1);
     }
+    @FXML
+    private void seekVideo() {
+        if (mediaPlayer != null) {
+            mediaPlayer.seek(Duration.seconds(progressSlider.getValue()));
+        }
+    }
+
+    @FXML
+    private void handleVolumeChange() {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volumeSlider.getValue());
+        }
+    }
+
+    private String formatTime(double seconds) {
+        int minutes = (int) seconds / 60;
+        int secs = (int) seconds % 60;
+        return String.format("%02d:%02d", minutes, secs);
+    }
+
 }
