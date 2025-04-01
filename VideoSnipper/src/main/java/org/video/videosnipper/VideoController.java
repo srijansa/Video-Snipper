@@ -3,6 +3,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.media.*;
 import javafx.stage.FileChooser;
@@ -21,6 +22,8 @@ public class VideoController {
     private Button playPauseButton;
     @FXML
     private ComboBox<String> speedBox;
+    @FXML
+    private CheckBox loopCheckBox;
     @FXML
     private void skipBackwardTen(){
         skipBySeconds(-10);
@@ -100,5 +103,11 @@ public class VideoController {
                 }
             }
         }
+    }
+    @FXML
+    private void handleLoopToggle(){
+        if (mediaPlayer == null) return;
+        boolean loopCheck = loopCheckBox.isSelected();
+        mediaPlayer.setCycleCount(loopCheck? MediaPlayer.INDEFINITE : 1);
     }
 }
